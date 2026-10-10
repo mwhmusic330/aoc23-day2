@@ -11,13 +11,14 @@ def parse_numbers(text: str) -> dict[str, int]:
         count, color = part.split()
         values[color] = int(count)
     return values
+
 def parse_game(line: str) -> tuple[int, list[dict[str, int]]]:
     head, rest = line.split(":",1)
     game_id = int(head.split()[-1])
     numbers = [parse_numbers(r) for r in rest.split(";")]
     return game_id, numbers
 
-def main():
+def part1():
     total = 0
     for line in lines:
         game_id, numbers = parse_game(line)
@@ -26,6 +27,17 @@ def main():
                for color, count in number.items()):
             continue
         total += game_id
+    print(total)
+
+def main():
+    total = 0
+    for line in lines:
+        game_id, numbers = parse_game(line)
+        power = 1
+        for color in limits:
+            biggest = max((n[color] for n in numbers if color in n), default=0)
+            power *= biggest
+        total+= power
     print(total)
 
 
