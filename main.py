@@ -2,7 +2,8 @@ limits = {"red": 12, "green": 13, "blue": 14}
 
 with open("inputday2part1", "r") as inputval:
     content = inputval.read()
-    lines = content.splitlines()
+
+lines = content.splitlines()
 
 def parse_numbers(text: str) -> dict[str, int]:
     values = {}
@@ -17,7 +18,15 @@ def parse_game(line: str) -> tuple[int, list[dict[str, int]]]:
     return game_id, numbers
 
 def main():
-    print("Hello from aoc23-2!")
+    total = 0
+    for line in lines:
+        game_id, numbers = parse_game(line)
+        if any(count > limits[color]
+               for number in numbers
+               for color, count in number.items()):
+            continue
+        total += game_id
+    print(total)
 
 
 if __name__ == "__main__":
