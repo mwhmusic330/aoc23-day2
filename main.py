@@ -1,6 +1,6 @@
 limits = {"red": 12, "green": 13, "blue": 14}
 
-with open("inputday2part1", "r") as inputval:
+with open("inputday2", "r") as inputval:
     content = inputval.read()
 
 lines = content.splitlines()
